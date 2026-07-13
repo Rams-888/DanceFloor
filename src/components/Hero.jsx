@@ -1,0 +1,63 @@
+import heroImage from "../assets/images/hero.jpg";
+
+function Hero() {
+    return (
+        <section
+            className="text-white d-flex align-items-center"
+            style={{
+                backgroundImage: `url(${heroImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                minHeight: "90vh"
+            }}
+        >
+            <div className="container">
+
+                <div className="row">
+
+                    <div className="col-lg-7">
+
+                        <h1 className="display-2 fw-bold">
+
+                            Dance Floor Academy
+
+                        </h1>
+
+                        <h3 className="mb-4">
+
+                            Where Passion Meets Performance
+
+                        </h3>
+
+                        <p className="lead">
+
+                            Welcome to Dance Floor Academy, where every movement
+                            tells a story. Learn from professional instructors,
+                            improve your confidence, creativity and stage
+                            performance in a fun learning environment.
+
+                        </p>
+
+                        <button className="btn btn-warning btn-lg me-3">
+
+                            Join Now
+
+                        </button>
+
+                        <button className="btn btn-outline-light btn-lg">
+
+                            Learn More
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    );
+}
+
+export default Hero;
