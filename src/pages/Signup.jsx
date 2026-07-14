@@ -11,7 +11,7 @@ function Signup() {
         firstName: "",
         lastName: "",
         email: "",
-        phone: "",
+        mobile: "",
         password: "",
         confirmPassword: ""
 
@@ -23,42 +23,88 @@ function Signup() {
 
     const handleChange = (event) => {
 
-        setFormData({
+    setFormData({
 
-            ...formData,
+        ...formData,
 
-            [event.target.name]: event.target.value
+        [event.target.name]: event.target.value
+
+    });
+
+};
+
+    const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+
+        alert("Passwords do not match!");
+        return;
+
+    }
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/users/signup", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                name: `${formData.firstName} ${formData.lastName}`,
+
+                email: formData.email,
+
+                mobile: formData.mobile,
+
+                password: formData.password
+
+            })
 
         });
 
-    };
+        const data = await response.json();
 
-    const handleSubmit = (event) => {
+        alert(data.message);
 
-        event.preventDefault();
+        if (response.ok) {
 
-        if(formData.password !== formData.confirmPassword){
+            setFormData({
 
-            alert("Passwords do not match!");
+                firstName: "",
 
-            return;
+                lastName: "",
+
+                email: "",
+
+                mobile: "",
+
+                password: "",
+
+                confirmPassword: ""
+
+            });
 
         }
 
-        alert("Account Created Successfully!");
+    }
 
-        setFormData({
+    catch (error) {
 
-            firstName:"",
-            lastName:"",
-            email:"",
-            phone:"",
-            password:"",
-            confirmPassword:""
+        console.error(error);
 
-        });
+        alert("Unable to connect to server");
 
-    };
+    }
+
+};
 
     return(
 
@@ -204,9 +250,9 @@ function Signup() {
 
                                         className="form-control"
 
-                                        name="phone"
+                                        name="mobile"
 
-                                        value={formData.phone}
+                                        value={formData.mobile}
 
                                         onChange={handleChange}
 
