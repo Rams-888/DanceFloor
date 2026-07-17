@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+console.log("API_URL =", API_URL);
 function AdminLogin() {
 
     const navigate = useNavigate();
