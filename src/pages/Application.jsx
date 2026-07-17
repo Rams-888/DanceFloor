@@ -30,29 +30,54 @@ function Application() {
         });
 
     };
+    const handleSubmit = async (event) => {
 
-    const handleSubmit = (event) => {
+    event.preventDefault();
 
-        event.preventDefault();
+    try {
 
-        alert("Application Submitted Successfully!");
+        const response = await fetch("http://localhost:5000/api/applications", {
 
-        setFormData({
+            method: "POST",
 
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            age: "",
-            gender: "",
-            danceStyle: "",
-            batch: "",
-            experience: "",
-            address: ""
+            headers: {
+
+                "Content-Type":"application/json"
+
+            },
+
+            body: JSON.stringify(formData)
 
         });
 
-    };
+        const data = await response.json();
+
+        alert(data.message);
+
+        setFormData({
+
+            firstName:"",
+            lastName:"",
+            email:"",
+            phone:"",
+            age:"",
+            gender:"",
+            danceStyle:"",
+            batch:"",
+            experience:"",
+            address:""
+
+        });
+
+    }
+
+    catch(error){
+
+        alert("Server Error");
+
+    }
+
+};
 
     return (
 

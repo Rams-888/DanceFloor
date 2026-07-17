@@ -13,7 +13,13 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import SessionDetails from "./pages/SessionDetails";
 import Enquiry from "./pages/Enquiry";
-
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ManageStudents from "./pages/ManageStudents";
+import ManageApplications from "./pages/ManageApplications";
+import ManageEnquiries from "./pages/ManageEnquiries";
+import ManageCourses from "./pages/ManageCourses";
+import ManageSessions from "./pages/ManageSessions";
 function App() {
 
     return (
@@ -35,6 +41,13 @@ function App() {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/session-details" element={<SessionDetails />} />
                 <Route path="/enquiry" element={<Enquiry />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/students" element={<ManageStudents />} />
+                <Route path="/admin/applications" element={<ManageApplications />} />
+                <Route path="/admin/enquiries" element={<ManageEnquiries />} />
+                <Route path="/admin/courses" element={<ManageCourses />} />
+                <Route path="/admin/sessions" element={<ManageSessions />} />
 
             </Routes>
 

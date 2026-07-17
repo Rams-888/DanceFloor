@@ -1,8 +1,81 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function Contact() {
+    const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+});
 
+const handleChange = (event) => {
+
+    setFormData({
+
+        ...formData,
+
+        [event.target.name]: event.target.value
+
+    });
+
+};
+
+const handleSubmit = async (event) => {
+
+    event.preventDefault();
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/enquiries", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                name: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                mobile: formData.phone,
+                subject: formData.subject,
+                message: formData.message
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+
+        setFormData({
+
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            subject: "",
+            message: ""
+
+        });
+
+    }
+
+    catch (error) {
+
+        alert("Server Error");
+
+    }
+
+};
     return (
 
         <>
@@ -157,7 +230,7 @@ function Contact() {
 
                         </h2>
 
-                        <form>
+                        <form onSubmit={handleSubmit}>
 
                             <div className="row">
 
@@ -170,9 +243,13 @@ function Contact() {
                                     </label>
 
                                     <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Enter First Name"
+                                      type="text"
+                                      className="form-control"
+                                      name="firstName"
+                                      value={formData.firstName}
+                                      onChange={handleChange}
+                                      placeholder="Enter First Name"
+                                      required
                                     />
 
                                 </div>
@@ -188,6 +265,9 @@ function Contact() {
                                     <input
                                         type="text"
                                         className="form-control"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
                                         placeholder="Enter Last Name"
                                     />
 
@@ -206,7 +286,11 @@ function Contact() {
                                 <input
                                     type="email"
                                     className="form-control"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
                                     placeholder="Enter Email"
+                                    required
                                 />
 
                             </div>
@@ -222,6 +306,9 @@ function Contact() {
                                 <input
                                     type="tel"
                                     className="form-control"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
                                     placeholder="Enter Phone Number"
                                 />
 
@@ -238,6 +325,9 @@ function Contact() {
                                 <input
                                     type="text"
                                     className="form-control"
+                                    name="subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
                                     placeholder="Subject"
                                 />
 
@@ -252,9 +342,13 @@ function Contact() {
                                 </label>
 
                                 <textarea
-                                    rows="5"
-                                    className="form-control"
-                                    placeholder="Write your message"
+                                   rows="5"
+                                   className="form-control"
+                                   name="message"
+                                   value={formData.message}
+                                   onChange={handleChange}
+                                   placeholder="Write your message"
+                                   required
                                 ></textarea>
 
                             </div>

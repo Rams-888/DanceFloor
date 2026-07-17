@@ -62,5 +62,52 @@ router.post("/signup", async (req, res) => {
     }
 
 });
+// Get All Students
+router.get("/", async (req, res) => {
 
+    try {
+
+        const users = await User.find();
+
+        res.status(200).json(users);
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: "Server Error"
+
+        });
+
+    }
+
+});
+// Delete Student
+router.delete("/:id", async (req, res) => {
+
+    try {
+
+        await User.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+
+            message: "Student Deleted Successfully"
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: "Server Error"
+
+        });
+
+    }
+
+});
 module.exports = router;
