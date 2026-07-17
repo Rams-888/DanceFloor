@@ -46,7 +46,7 @@ function Signup() {
 
     try {
 
-        const response = await fetch("https://dancefloor-backend.onrender.com/api/users/signup", {
+        const response = await fetch(`${API_URL}/api/users/signup`, {
 
             method: "POST",
 

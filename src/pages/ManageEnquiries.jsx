@@ -9,7 +9,7 @@ function ManageEnquiries() {
 
     const fetchEnquiries = async () => {
 
-        const response = await fetch("${API_URL}/api/enquiries");
+        const response = await fetch(`${API_URL}/api/enquiries`);
 
         const data = await response.json();
 

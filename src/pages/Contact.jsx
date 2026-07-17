@@ -31,7 +31,7 @@ const handleSubmit = async (event) => {
 
     try {
 
-        const response = await fetch("${API_URL}/api/enquiries", {
+        const response = await fetch(`${API_URL}/api/enquiries`, {
 
             method: "POST",
 

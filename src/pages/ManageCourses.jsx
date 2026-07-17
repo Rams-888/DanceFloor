@@ -16,7 +16,7 @@ function ManageCourses() {
 
     const fetchCourses = async () => {
 
-        const response = await fetch("${API_URL}/api/courses");
+        const response = await fetch(`${API_URL}/api/courses`);
 
         const data = await response.json();
 
@@ -46,7 +46,7 @@ function ManageCourses() {
 
         e.preventDefault();
 
-        await fetch("${API_URL}/api/courses", {
+        await fetch(`${API_URL}/api/courses`, {
 
             method: "POST",
 

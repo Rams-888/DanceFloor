@@ -11,7 +11,7 @@ function ManageApplications() {
 
         try {
 
-            const response = await fetch("${API_URL}/api/applications");
+            const response = await fetch(`${API_URL}/api/applications`);
 
             const data = await response.json();
 

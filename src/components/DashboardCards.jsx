@@ -15,7 +15,7 @@ function DashboardCards() {
 
     useEffect(() => {
 
-        fetch("${API_URL}/api/admin/stats")
+        fetch(`${API_URL}/api/admin/stats`)
 
             .then((response) => response.json())
 

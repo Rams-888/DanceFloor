@@ -11,7 +11,7 @@ function ManageStudents() {
 
         try {
 
-            const response = await fetch("${API_URL}/api/users");
+            const response = await fetch(`${API_URL}/api/users`);
 
             const data = await response.json();
 

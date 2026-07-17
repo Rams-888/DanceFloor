@@ -37,7 +37,7 @@ function Application() {
 
     try {
 
-        const response = await fetch("${API_URL}/api/applications", {
+        const response = await fetch(`${API_URL}/api/applications`, {
 
             method: "POST",
 

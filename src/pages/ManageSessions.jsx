@@ -21,7 +21,7 @@ function ManageSessions() {
 
     const fetchSessions = async () => {
 
-        const response = await fetch("${API_URL}/api/sessions");
+        const response = await fetch(`${API_URL}/api/sessions`);
 
         const data = await response.json();
 
@@ -51,7 +51,7 @@ function ManageSessions() {
 
         e.preventDefault();
 
-        await fetch("${API_URL}/api/sessions", {
+        await fetch(`${API_URL}/api/sessions`, {
 
             method: "POST",
 
