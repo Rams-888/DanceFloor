@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
     });
   }
 });
-const User = require("../models/User");
+
 
 // Dashboard Statistics
 router.get("/stats", async (req, res) => {
