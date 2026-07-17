@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../config";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
@@ -20,7 +21,7 @@ function ManageSessions() {
 
     const fetchSessions = async () => {
 
-        const response = await fetch("http://localhost:5000/api/sessions");
+        const response = await fetch("${API_URL}/api/sessions");
 
         const data = await response.json();
 
@@ -50,7 +51,7 @@ function ManageSessions() {
 
         e.preventDefault();
 
-        await fetch("http://localhost:5000/api/sessions", {
+        await fetch("${API_URL}/api/sessions", {
 
             method: "POST",
 
@@ -82,7 +83,7 @@ function ManageSessions() {
 
     const deleteSession = async (id) => {
 
-        await fetch(`http://localhost:5000/api/sessions/${id}`, {
+        await fetch(`${API_URL}/api/sessions/${id}`, {
 
             method: "DELETE"
 

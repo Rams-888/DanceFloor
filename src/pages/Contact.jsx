@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -30,7 +31,7 @@ const handleSubmit = async (event) => {
 
     try {
 
-        const response = await fetch("http://localhost:5000/api/enquiries", {
+        const response = await fetch("${API_URL}/api/enquiries", {
 
             method: "POST",
 

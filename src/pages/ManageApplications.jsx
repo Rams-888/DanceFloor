@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
@@ -10,7 +11,7 @@ function ManageApplications() {
 
         try {
 
-            const response = await fetch("http://localhost:5000/api/applications");
+            const response = await fetch("${API_URL}/api/applications");
 
             const data = await response.json();
 
@@ -38,7 +39,7 @@ function ManageApplications() {
 
         if (!confirmDelete) return;
 
-        await fetch(`http://localhost:5000/api/applications/${id}`, {
+        await fetch(`${API_URL}/api/applications/${id}`, {
 
             method: "DELETE"
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
@@ -10,7 +11,7 @@ function ManageStudents() {
 
         try {
 
-            const response = await fetch("http://localhost:5000/api/users");
+            const response = await fetch("${API_URL}/api/users");
 
             const data = await response.json();
 
@@ -38,7 +39,7 @@ function ManageStudents() {
 
         if (!confirmDelete) return;
 
-        await fetch(`http://localhost:5000/api/users/${id}`, {
+        await fetch(`${API_URL}/api/users/${id}`, {
 
             method: "DELETE"
 

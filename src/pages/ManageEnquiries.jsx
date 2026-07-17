@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
@@ -8,7 +9,7 @@ function ManageEnquiries() {
 
     const fetchEnquiries = async () => {
 
-        const response = await fetch("http://localhost:5000/api/enquiries");
+        const response = await fetch("${API_URL}/api/enquiries");
 
         const data = await response.json();
 
@@ -26,7 +27,7 @@ function ManageEnquiries() {
 
         if (!window.confirm("Delete this enquiry?")) return;
 
-        await fetch(`http://localhost:5000/api/enquiries/${id}`, {
+        await fetch(`${API_URL}/api/enquiries/${id}`, {
 
             method: "DELETE"
 

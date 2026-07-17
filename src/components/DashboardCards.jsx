@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 
 function DashboardCards() {
 
@@ -14,7 +15,7 @@ function DashboardCards() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/api/admin/stats")
+        fetch("${API_URL}/api/admin/stats")
 
             .then((response) => response.json())
 

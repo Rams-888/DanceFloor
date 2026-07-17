@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../config";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
@@ -15,7 +16,7 @@ function ManageCourses() {
 
     const fetchCourses = async () => {
 
-        const response = await fetch("http://localhost:5000/api/courses");
+        const response = await fetch("${API_URL}/api/courses");
 
         const data = await response.json();
 
@@ -45,7 +46,7 @@ function ManageCourses() {
 
         e.preventDefault();
 
-        await fetch("http://localhost:5000/api/courses", {
+        await fetch("${API_URL}/api/courses", {
 
             method: "POST",
 
@@ -74,7 +75,7 @@ function ManageCourses() {
 
     const deleteCourse = async (id) => {
 
-        await fetch(`http://localhost:5000/api/courses/${id}`, {
+        await fetch(`${API_URL}/api/courses/${id}`, {
 
             method: "DELETE"
 

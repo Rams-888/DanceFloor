@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -36,7 +37,7 @@ function Application() {
 
     try {
 
-        const response = await fetch("http://localhost:5000/api/applications", {
+        const response = await fetch("${API_URL}/api/applications", {
 
             method: "POST",
 
