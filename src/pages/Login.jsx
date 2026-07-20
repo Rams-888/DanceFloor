@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -12,26 +13,48 @@ function Login() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        if(email==="" || password===""){
+    if (email === "" || password === "") {
+        alert("Please fill all fields.");
+        return;
+    }
 
-            alert("Please fill all fields.");
+    try {
 
+        const response = await fetch(`${API_URL}/api/users/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.message);
             return;
-
         }
 
-        alert("Login Successful!");
+        alert(data.message);
 
         setEmail("");
-
         setPassword("");
 
-    };
+    } catch (error) {
 
+        console.error(error);
+        alert("Server Error");
+
+    }
+
+};
     return(
 
         <>

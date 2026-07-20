@@ -35,7 +35,9 @@ router.post("/signup", async (req, res) => {
 
             mobile,
 
-            password
+            password,
+
+            role: "student" // Set default role to "student"
 
         });
 
@@ -57,6 +59,60 @@ router.post("/signup", async (req, res) => {
 
             message: "Server Error"
 
+        });
+
+    }
+
+});
+// Login Route
+router.post("/login", async (req, res) => {
+
+    try {
+
+        const { email, password } = req.body;
+
+        // Find user by email
+        const user = await User.findOne({ email });
+
+        if (!user) {
+
+            return res.status(400).json({
+                message: "Invalid Email"
+            });
+
+        }
+
+        // Check password
+        if (user.password !== password) {
+
+            return res.status(400).json({
+                message: "Invalid Password"
+            });
+
+        }
+
+        // Login Successful
+        res.status(200).json({
+
+            message: "Login Successful",
+
+            role: user.role,
+
+            user: {
+                name: user.name,
+                email: user.email
+            }
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Server Error"
         });
 
     }
