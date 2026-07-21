@@ -9,6 +9,7 @@ import Testimonials from "../components/Testimonials";
 import Achievements from "../components/Achievements";
 import UpcomingEvents from "../components/UpcomingEvents";
 import Footer from "../components/Footer";
+import heroDancer from "../assets/images/dance1.png";
 
 function Home() {
 

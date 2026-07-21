@@ -1,7 +1,10 @@
 import heroImage from "../assets/images/hero.jpg";
+import heroDancer from "../assets/images/dance1.png";
 
 function Hero() {
+
     return (
+
         <section
             className="text-white d-flex align-items-center"
             style={{
@@ -11,11 +14,14 @@ function Hero() {
                 minHeight: "90vh"
             }}
         >
+
             <div className="container">
 
-                <div className="row">
+                <div className="row align-items-center">
 
-                    <div className="col-lg-7">
+                    {/* Left Side */}
+
+                    <div className="col-lg-6">
 
                         <h1 className="display-2 fw-bold">
 
@@ -52,12 +58,26 @@ function Hero() {
 
                     </div>
 
+                    {/* Right Side */}
+
+                    <div className="col-lg-6 text-center">
+
+                        <img
+                            src={heroDancer}
+                            alt="Dance Performer"
+                            className="hero-image"
+                        />
+
+                    </div>
+
                 </div>
 
             </div>
 
         </section>
+
     );
+
 }
 
 export default Hero;
