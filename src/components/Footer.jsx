@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 function Footer() {
 
@@ -14,9 +15,19 @@ function Footer() {
 
                     <div className="col-md-4">
 
-                        <h3 className="text-warning">
-                            💃 Dance Floor Academy
-                        </h3>
+                        <h3 className="d-flex align-items-center text-warning">
+
+    <img
+        src={logo}
+        alt="Dance Floor Logo"
+        className="footer-logo"
+    />
+
+    <span className="ms-2">
+        Dance Floor Academy
+    </span>
+
+</h3>
 
                         <p>
                             Empowering dancers through passion,

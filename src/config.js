@@ -1,1 +1,1 @@
-export const API_URL = "https://dancefloor-backend.onrender.com";
+VITE_API_URL = "https://dancefloor-backend.onrender.com";
