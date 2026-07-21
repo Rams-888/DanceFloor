@@ -1,1 +1,2 @@
-VITE_API_URL = "https://dancefloor-backend.onrender.com";
+export const API_URL =
+    import.meta.env.VITE_API_URL || "https://dancefloor-backend.onrender.com";
