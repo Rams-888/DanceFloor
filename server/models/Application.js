@@ -48,9 +48,15 @@ const applicationSchema = new mongoose.Schema(
     },
 
     address: {
-        type: String,
-        required: true
-    }
+    type: String,
+    required: true
+},
+
+status: {
+    type: String,
+    enum: ["Pending", "Approved", "Rejected"],
+    default: "Pending"
+}
 
 },
 {

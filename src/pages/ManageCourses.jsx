@@ -13,7 +13,7 @@ function ManageCourses() {
         duration: "",
         fees: ""
     });
-
+    const [editingId, setEditingId] = useState(null);
     const fetchCourses = async () => {
 
         const response = await fetch(`${API_URL}/api/courses`);
@@ -41,37 +41,54 @@ function ManageCourses() {
         });
 
     };
+    const editCourse = (item) => {
 
+    setCourse({
+        title: item.title,
+        description: item.description,
+        duration: item.duration,
+        fees: item.fees
+    });
+
+    setEditingId(item._id);
+
+};
     const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        e.preventDefault();
+    if (editingId) {
+
+        await fetch(`${API_URL}/api/courses/${editingId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(course)
+        });
+
+    } else {
 
         await fetch(`${API_URL}/api/courses`, {
-
             method: "POST",
-
             headers: {
-
                 "Content-Type": "application/json"
-
             },
-
             body: JSON.stringify(course)
-
         });
 
-        setCourse({
+    }
 
-            title: "",
-            description: "",
-            duration: "",
-            fees: ""
+    setCourse({
+        title: "",
+        description: "",
+        duration: "",
+        fees: ""
+    });
 
-        });
+    setEditingId(null);
 
-        fetchCourses();
-
-    };
+    fetchCourses();
+};
 
     const deleteCourse = async (id) => {
 
@@ -186,16 +203,21 @@ function ManageCourses() {
 
                                             <td>
 
-                                                <button
-                                                    className="btn btn-danger btn-sm"
-                                                    onClick={()=>deleteCourse(item._id)}
-                                                >
+    <button
+        className="btn btn-warning btn-sm me-2"
+        onClick={() => editCourse(item)}
+    >
+        Edit
+    </button>
 
-                                                    Delete
+    <button
+        className="btn btn-danger btn-sm"
+        onClick={() => deleteCourse(item._id)}
+    >
+        Delete
+    </button>
 
-                                                </button>
-
-                                            </td>
+</td>
 
                                         </tr>
 

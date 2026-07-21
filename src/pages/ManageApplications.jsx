@@ -17,9 +17,7 @@ function ManageApplications() {
 
             setApplications(data);
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.log(error);
 
@@ -49,6 +47,35 @@ function ManageApplications() {
 
     };
 
+    // Update Application Status
+    const updateStatus = async (id, status) => {
+
+        try {
+
+            await fetch(`${API_URL}/api/applications/${id}`, {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify({ status })
+
+            });
+
+            fetchApplications();
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+
     return (
 
         <div className="container-fluid">
@@ -68,9 +95,7 @@ function ManageApplications() {
                     <div className="container mt-4">
 
                         <h2 className="mb-4">
-
                             Student Applications
-
                         </h2>
 
                         <table className="table table-bordered table-hover">
@@ -84,6 +109,7 @@ function ManageApplications() {
                                     <th>Phone</th>
                                     <th>Dance Style</th>
                                     <th>Batch</th>
+                                    <th>Status</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -99,9 +125,7 @@ function ManageApplications() {
                                         <tr key={application._id}>
 
                                             <td>
-
                                                 {application.firstName} {application.lastName}
-
                                             </td>
 
                                             <td>{application.email}</td>
@@ -114,16 +138,47 @@ function ManageApplications() {
 
                                             <td>
 
-                                                <button
-
-                                                    className="btn btn-danger btn-sm"
-
-                                                    onClick={() => deleteApplication(application._id)}
-
+                                                <span
+                                                    className={`badge ${
+                                                        application.status === "Approved"
+                                                            ? "bg-success"
+                                                            : application.status === "Rejected"
+                                                            ? "bg-danger"
+                                                            : "bg-warning text-dark"
+                                                    }`}
                                                 >
+                                                    {application.status || "Pending"}
+                                                </span>
 
+                                            </td>
+
+                                            <td>
+
+                                                <button
+                                                    className="btn btn-success btn-sm me-2"
+                                                    onClick={() =>
+                                                        updateStatus(application._id, "Approved")
+                                                    }
+                                                >
+                                                    Approve
+                                                </button>
+
+                                                <button
+                                                    className="btn btn-warning btn-sm me-2"
+                                                    onClick={() =>
+                                                        updateStatus(application._id, "Rejected")
+                                                    }
+                                                >
+                                                    Reject
+                                                </button>
+
+                                                <button
+                                                    className="btn btn-danger btn-sm"
+                                                    onClick={() =>
+                                                        deleteApplication(application._id)
+                                                    }
+                                                >
                                                     Delete
-
                                                 </button>
 
                                             </td>

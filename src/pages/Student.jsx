@@ -1,7 +1,11 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
 function Student() {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+
+    console.log(user);
 
     return (
 
@@ -59,13 +63,13 @@ function Student() {
 
                                 <h2>
 
-                                    Ram
+                                    {user?.name}
 
                                 </h2>
 
                                 <p>
 
-                                    Student ID : DFA2026001
+                                    Email : {user?.email}
 
                                 </p>
 

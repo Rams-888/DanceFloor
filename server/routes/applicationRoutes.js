@@ -77,5 +77,43 @@ router.delete("/:id", async (req, res) => {
     }
 
 });
+// Update Application Status
+router.put("/:id", async (req, res) => {
+
+    try {
+
+        const updatedApplication = await Application.findByIdAndUpdate(
+
+            req.params.id,
+
+            req.body,
+
+            {
+                new: true
+            }
+
+        );
+
+        res.status(200).json({
+
+            message: "Application Updated Successfully",
+
+            application: updatedApplication
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: "Server Error"
+
+        });
+
+    }
+
+});
 
 module.exports = router;

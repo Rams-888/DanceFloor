@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -35,14 +36,28 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/student" element={<Student />} />
+                <Route
+    path="/student"
+    element={
+        <ProtectedRoute allowedRole="student">
+            <Student />
+        </ProtectedRoute>
+    }
+/>
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/session-details" element={<SessionDetails />} />
                 <Route path="/enquiry" element={<Enquiry />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route
+    path="/admin/dashboard"
+    element={
+        <ProtectedRoute allowedRole="admin">
+            <AdminDashboard />
+        </ProtectedRoute>
+    }
+/>
                 <Route path="/admin/students" element={<ManageStudents />} />
                 <Route path="/admin/applications" element={<ManageApplications />} />
                 <Route path="/admin/enquiries" element={<ManageEnquiries />} />
