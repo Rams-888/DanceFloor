@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
+const Admin = require("../models/Admin");
 
 const router = express.Router();
 
@@ -71,7 +72,32 @@ router.post("/login", async (req, res) => {
 
         const { email, password } = req.body;
 
-        // Find user by email
+        // 1. Check Admin collection first
+        console.log("Login Email:", email);
+        const admin = await Admin.findOne({ email });
+        console.log("Admin Found:", admin);
+
+        if (admin) {
+
+            if (admin.password !== password) {
+
+                return res.status(400).json({
+                    message: "Invalid Password"
+                });
+
+            }
+
+            return res.status(200).json({
+
+                message: "Login Successful",
+                role: "admin",
+                user: admin
+
+            });
+
+        }
+
+        // 2. Check Student collection
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -82,7 +108,6 @@ router.post("/login", async (req, res) => {
 
         }
 
-        // Check password
         if (user.password !== password) {
 
             return res.status(400).json({
@@ -91,17 +116,11 @@ router.post("/login", async (req, res) => {
 
         }
 
-        // Login Successful
-        res.status(200).json({
+        return res.status(200).json({
 
             message: "Login Successful",
-
-            role: user.role,
-
-            user: {
-                name: user.name,
-                email: user.email
-            }
+            role: "student",
+            user
 
         });
 
@@ -112,12 +131,15 @@ router.post("/login", async (req, res) => {
         console.error(error);
 
         res.status(500).json({
+
             message: "Server Error"
+
         });
 
     }
 
 });
+
 // Get All Students
 router.get("/", async (req, res) => {
 

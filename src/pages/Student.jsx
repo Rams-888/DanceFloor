@@ -59,7 +59,7 @@ function Student() {
 
                                 <h2>
 
-                                    Ramya Sri
+                                    Ram
 
                                 </h2>
 

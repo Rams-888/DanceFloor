@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
 
 import Navbar from "../components/Navbar";
@@ -13,6 +13,8 @@ function Login() {
 
     const [showPassword, setShowPassword] = useState(false);
 
+
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
 
     event.preventDefault();
@@ -44,9 +46,21 @@ function Login() {
 
         alert(data.message);
 
-        setEmail("");
-        setPassword("");
+alert(data.message);
 
+// Save logged-in user
+localStorage.setItem("user", JSON.stringify(data.user));
+localStorage.setItem("role", data.role);
+
+if (data.role === "admin") {
+
+    navigate("/admin/dashboard");
+
+} else {
+
+    navigate("/student");
+
+}
     } catch (error) {
 
         console.error(error);
