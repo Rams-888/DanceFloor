@@ -15,16 +15,12 @@ function Footer() {
                     <div className="col-md-4">
 
                         <h3 className="text-warning">
-
                             💃 Dance Floor Academy
-
                         </h3>
 
                         <p>
-
                             Empowering dancers through passion,
                             creativity and excellence.
-
                         </p>
 
                     </div>
@@ -33,56 +29,71 @@ function Footer() {
 
                     <div className="col-md-4">
 
-                        <h4>
-
-                            Quick Links
-
-                        </h4>
+                        <h4>Quick Links</h4>
 
                         <ul className="list-unstyled">
 
                             <li>
-
                                 <Link
                                     to="/"
                                     className="text-white text-decoration-none"
                                 >
                                     Home
                                 </Link>
-
                             </li>
 
                             <li>
-
                                 <Link
                                     to="/about"
                                     className="text-white text-decoration-none"
                                 >
                                     About
                                 </Link>
-
                             </li>
 
                             <li>
-
                                 <Link
                                     to="/application"
                                     className="text-white text-decoration-none"
                                 >
                                     Application
                                 </Link>
-
                             </li>
 
                             <li>
-
                                 <Link
                                     to="/contact"
                                     className="text-white text-decoration-none"
                                 >
                                     Contact
                                 </Link>
+                            </li>
 
+                            <li>
+                                <Link
+                                    to="/faq"
+                                    className="text-white text-decoration-none"
+                                >
+                                    FAQ
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    to="/privacy"
+                                    className="text-white text-decoration-none"
+                                >
+                                    Privacy Policy
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link
+                                    to="/terms"
+                                    className="text-white text-decoration-none"
+                                >
+                                    Terms & Conditions
+                                </Link>
                             </li>
 
                         </ul>
@@ -93,29 +104,13 @@ function Footer() {
 
                     <div className="col-md-4">
 
-                        <h4>
+                        <h4>Contact</h4>
 
-                            Contact
+                        <p>📍 Chennai, Tamil Nadu</p>
 
-                        </h4>
+                        <p>📞 +91 9876543210</p>
 
-                        <p>
-
-                            📍 Chennai, Tamil Nadu
-
-                        </p>
-
-                        <p>
-
-                            📞 +91 9876543210
-
-                        </p>
-
-                        <p>
-
-                            ✉ info@danceflooracademy.com
-
-                        </p>
+                        <p>✉ info@danceflooracademy.com</p>
 
                     </div>
 
@@ -126,11 +121,8 @@ function Footer() {
                 <div className="text-center">
 
                     <p>
-
                         © {new Date().getFullYear()} Dance Floor Academy.
-
                         All Rights Reserved.
-
                     </p>
 
                 </div>

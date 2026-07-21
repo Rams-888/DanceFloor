@@ -21,11 +21,13 @@ import ManageApplications from "./pages/ManageApplications";
 import ManageEnquiries from "./pages/ManageEnquiries";
 import ManageCourses from "./pages/ManageCourses";
 import ManageSessions from "./pages/ManageSessions";
+import ScrollToTop from "./components/ScrollToTop";
 function App() {
 
     return (
 
         <BrowserRouter>
+            <ScrollToTop />
 
             <Routes>
 

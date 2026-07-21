@@ -56,6 +56,11 @@ function Navbar() {
                                 Contact
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/faq">
+                                FAQ
+                            </Link>
+                        </li>
 
                         {!role ? (
                             <>
@@ -65,11 +70,6 @@ function Navbar() {
                                     </Link>
                                 </li>
 
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/signup">
-                                        Sign Up
-                                    </Link>
-                                </li>
                             </>
                         ) : (
                             <>
@@ -88,6 +88,7 @@ function Navbar() {
                                         </Link>
                                     </li>
                                 )}
+                                
 
                                 <li className="nav-item">
                                     <button

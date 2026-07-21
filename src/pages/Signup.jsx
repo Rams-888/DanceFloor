@@ -1,156 +1,131 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function Signup() {
 
-    const [formData, setFormData] = useState({
+    const navigate = useNavigate();
 
+    const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
         email: "",
         mobile: "",
         password: "",
         confirmPassword: ""
-
     });
 
     const [showPassword, setShowPassword] = useState(false);
-
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleChange = (event) => {
 
-    setFormData({
+        setFormData({
 
-        ...formData,
+            ...formData,
 
-        [event.target.name]: event.target.value
-
-    });
-
-};
-
-    const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-
-        alert("Passwords do not match!");
-        return;
-
-    }
-
-    try {
-
-        const response = await fetch(`${API_URL}/api/users/signup`, {
-
-            method: "POST",
-
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify({
-
-                name: `${formData.firstName} ${formData.lastName}`,
-
-                email: formData.email,
-
-                mobile: formData.mobile,
-
-                password: formData.password
-
-            })
+            [event.target.name]: event.target.value
 
         });
 
-        const data = await response.json();
+    };
 
-        alert(data.message);
+    const handleSubmit = async (e) => {
 
-        if (response.ok) {
+        e.preventDefault();
 
-            setFormData({
+        if (formData.password !== formData.confirmPassword) {
 
-                firstName: "",
-
-                lastName: "",
-
-                email: "",
-
-                mobile: "",
-
-                password: "",
-
-                confirmPassword: ""
-
-            });
+            alert("Passwords do not match!");
+            return;
 
         }
 
-    }
+        try {
 
-    catch (error) {
+            const response = await fetch(`${API_URL}/api/users/signup`, {
 
-        console.error(error);
+                method: "POST",
 
-        alert("Unable to connect to server");
+                headers: {
 
-    }
+                    "Content-Type": "application/json"
 
-};
+                },
 
-    return(
+                body: JSON.stringify({
 
-        <>
+                    name: `${formData.firstName} ${formData.lastName}`,
 
-        <Navbar/>
+                    email: formData.email,
 
-        {/* Hero */}
+                    mobile: formData.mobile,
 
-        <section className="bg-dark text-white py-5">
+                    password: formData.password
 
-            <div className="container text-center">
+                })
 
-                <h1 className="display-3">
+            });
 
-                    Create Account
+            const data = await response.json();
 
-                </h1>
+            alert(data.message);
 
-                <p className="lead">
+            if (response.ok) {
 
-                    Join Dance Floor Academy Today
+                setFormData({
 
-                </p>
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    mobile: "",
+                    password: "",
+                    confirmPassword: ""
 
-            </div>
+                });
 
-        </section>
+                navigate("/login");
 
-        {/* Signup Form */}
+            }
 
-        <section className="container my-5">
+        }
 
-            <div className="row justify-content-center">
+        catch (error) {
 
-                <div className="col-lg-7">
+            console.error(error);
 
-                    <div className="card shadow-lg">
+            alert("Unable to connect to server");
+
+        }
+
+    };
+
+    return (
+
+        <div
+            className="container-fluid d-flex justify-content-center align-items-center bg-light"
+            style={{ minHeight: "100vh" }}
+        >
+
+            <div className="row w-100 justify-content-center">
+
+                <div className="col-md-8 col-lg-6">
+
+                    <div className="card shadow-lg border-0 rounded-4">
 
                         <div className="card-body p-5">
 
-                            <h2 className="text-center mb-4">
+                            <div className="text-center mb-4">
 
-                                Student Registration
+                                <h2 className="fw-bold text-warning">
+                                    Dance Floor Academy
+                                </h2>
 
-                            </h2>
+                                <p className="text-muted">
+                                    Create Your Account
+                                </p>
+
+                            </div>
 
                             <form onSubmit={handleSubmit}>
 
@@ -165,19 +140,13 @@ function Signup() {
                                         </label>
 
                                         <input
-
                                             type="text"
-
                                             className="form-control"
-
                                             name="firstName"
-
                                             value={formData.firstName}
-
                                             onChange={handleChange}
-
+                                            placeholder="Enter First Name"
                                             required
-
                                         />
 
                                     </div>
@@ -191,19 +160,13 @@ function Signup() {
                                         </label>
 
                                         <input
-
                                             type="text"
-
                                             className="form-control"
-
                                             name="lastName"
-
                                             value={formData.lastName}
-
                                             onChange={handleChange}
-
+                                            placeholder="Enter Last Name"
                                             required
-
                                         />
 
                                     </div>
@@ -219,19 +182,13 @@ function Signup() {
                                     </label>
 
                                     <input
-
                                         type="email"
-
                                         className="form-control"
-
                                         name="email"
-
                                         value={formData.email}
-
                                         onChange={handleChange}
-
+                                        placeholder="Enter Email"
                                         required
-
                                     />
 
                                 </div>
@@ -240,24 +197,18 @@ function Signup() {
 
                                     <label className="form-label">
 
-                                        Phone Number
+                                        Mobile Number
 
                                     </label>
 
                                     <input
-
                                         type="tel"
-
                                         className="form-control"
-
                                         name="mobile"
-
                                         value={formData.mobile}
-
                                         onChange={handleChange}
-
+                                        placeholder="Enter Mobile Number"
                                         required
-
                                     />
 
                                 </div>
@@ -273,33 +224,21 @@ function Signup() {
                                     <div className="input-group">
 
                                         <input
-
                                             type={showPassword ? "text" : "password"}
-
                                             className="form-control"
-
                                             name="password"
-
                                             value={formData.password}
-
                                             onChange={handleChange}
-
+                                            placeholder="Enter Password"
                                             required
-
                                         />
 
                                         <button
-
                                             type="button"
-
                                             className="btn btn-outline-secondary"
-
                                             onClick={() => setShowPassword(!showPassword)}
-
                                         >
-
                                             {showPassword ? "Hide" : "Show"}
-
                                         </button>
 
                                     </div>
@@ -317,39 +256,30 @@ function Signup() {
                                     <div className="input-group">
 
                                         <input
-
                                             type={showConfirmPassword ? "text" : "password"}
-
                                             className="form-control"
-
                                             name="confirmPassword"
-
                                             value={formData.confirmPassword}
-
                                             onChange={handleChange}
-
+                                            placeholder="Confirm Password"
                                             required
-
                                         />
 
                                         <button
-
                                             type="button"
-
                                             className="btn btn-outline-secondary"
-
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-
+                                            onClick={() =>
+                                                setShowConfirmPassword(!showConfirmPassword)
+                                            }
                                         >
-
                                             {showConfirmPassword ? "Hide" : "Show"}
-
                                         </button>
 
                                     </div>
 
                                 </div>
-                                                                <div className="form-check mb-4">
+
+                                <div className="form-check mb-4">
 
                                     <input
                                         className="form-check-input"
@@ -363,8 +293,23 @@ function Signup() {
                                         htmlFor="terms"
                                     >
 
-                                        I agree to the Terms & Conditions
-                                        and Privacy Policy.
+                                        I agree to the{" "}
+
+                                        <Link
+                                            to="/terms-conditions"
+                                            className="text-decoration-none"
+                                        >
+                                            Terms & Conditions
+                                        </Link>
+
+                                        {" "}and{" "}
+
+                                        <Link
+                                            to="/privacy-policy"
+                                            className="text-decoration-none"
+                                        >
+                                            Privacy Policy
+                                        </Link>
 
                                     </label>
 
@@ -372,7 +317,7 @@ function Signup() {
 
                                 <button
                                     type="submit"
-                                    className="btn btn-warning w-100 btn-lg"
+                                    className="btn btn-warning w-100"
                                 >
 
                                     Create Account
@@ -383,7 +328,7 @@ function Signup() {
 
                             <div className="text-center mt-4">
 
-                                <p>
+                                <p className="mb-0">
 
                                     Already have an account?
 
@@ -408,146 +353,7 @@ function Signup() {
 
             </div>
 
-        </section>
-
-        {/* Benefits */}
-
-        <section className="container my-5">
-
-            <h2 className="text-center mb-5">
-
-                Benefits of Joining
-
-            </h2>
-
-            <div className="row">
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>🎓</h1>
-
-                            <h4>
-
-                                Professional Training
-
-                            </h4>
-
-                            <p>
-
-                                Learn from experienced instructors with
-                                structured training programs.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>🏆</h1>
-
-                            <h4>
-
-                                Competitions
-
-                            </h4>
-
-                            <p>
-
-                                Participate in state and national dance
-                                competitions to showcase your talent.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>🎭</h1>
-
-                            <h4>
-
-                                Stage Performances
-
-                            </h4>
-
-                            <p>
-
-                                Build confidence through live performances,
-                                workshops and cultural events.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        {/* Contact */}
-
-        <section className="container my-5">
-
-            <div className="card shadow">
-
-                <div className="card-body text-center">
-
-                    <h2>
-
-                        Need Assistance?
-
-                    </h2>
-
-                    <p>
-
-                        📞 +91 9876543210
-
-                    </p>
-
-                    <p>
-
-                        ✉ info@danceflooracademy.com
-
-                    </p>
-
-                    <p>
-
-                        📍 Anna Nagar, Chennai
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <Footer />
-
-        </>
+        </div>
 
     );
 

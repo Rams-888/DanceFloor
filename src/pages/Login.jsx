@@ -2,118 +2,105 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
 function Login() {
 
     const [email, setEmail] = useState("");
-
     const [password, setPassword] = useState("");
-
     const [showPassword, setShowPassword] = useState(false);
 
-
     const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    if (email === "" || password === "") {
-        alert("Please fill all fields.");
-        return;
-    }
+        if (email === "" || password === "") {
 
-    try {
-
-        const response = await fetch(`${API_URL}/api/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            alert(data.message);
+            alert("Please fill all fields.");
             return;
+
         }
 
-        alert(data.message);
+        try {
 
-alert(data.message);
+            const response = await fetch(`${API_URL}/api/users/login`, {
 
-// Save logged-in user
-localStorage.setItem("user", JSON.stringify(data.user));
-localStorage.setItem("role", data.role);
+                method: "POST",
 
-if (data.role === "admin") {
+                headers: {
 
-    navigate("/admin/dashboard");
+                    "Content-Type": "application/json"
 
-} else {
+                },
 
-    navigate("/student");
+                body: JSON.stringify({
 
-}
-    } catch (error) {
+                    email,
+                    password
 
-        console.error(error);
-        alert("Server Error");
+                })
 
-    }
+            });
 
-};
-    return(
+            const data = await response.json();
 
-        <>
+            if (!response.ok) {
 
-        <Navbar/>
+                alert(data.message);
+                return;
 
-        {/* Hero */}
+            }
 
-        <section className="bg-dark text-white py-5">
+            alert(data.message);
 
-            <div className="container text-center">
+            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("role", data.role);
 
-                <h1 className="display-3">
+            if (data.role === "admin") {
 
-                    Login
+                navigate("/admin/dashboard");
 
-                </h1>
+            } else {
 
-                <p className="lead">
+                navigate("/student");
 
-                    Welcome Back!
+            }
 
-                </p>
+        } catch (error) {
 
-            </div>
+            console.error(error);
+            alert("Server Error");
 
-        </section>
+        }
 
-        {/* Login Form */}
+    };
 
-        <section className="container my-5">
+    return (
 
-            <div className="row justify-content-center">
+        <div
+            className="container-fluid d-flex justify-content-center align-items-center bg-light"
+            style={{ minHeight: "100vh" }}
+        >
 
-                <div className="col-lg-6">
+            <div className="row w-100 justify-content-center">
 
-                    <div className="card shadow-lg">
+                <div className="col-md-6 col-lg-4">
+
+                    <div className="card shadow-lg border-0 rounded-4">
 
                         <div className="card-body p-5">
 
-                            <h2 className="text-center mb-4">
+                            <div className="text-center mb-4">
 
-                                Sign In
+                                <h2 className="fw-bold text-warning">
+                                    Dance Floor Academy
+                                </h2>
 
-                            </h2>
+                                <p className="text-muted">
+                                    Welcome Back!
+                                </p>
+
+                            </div>
 
                             <form onSubmit={handleSubmit}>
 
@@ -128,15 +115,10 @@ if (data.role === "admin") {
                                     <input
 
                                         type="email"
-
                                         className="form-control"
-
-                                        value={email}
-
-                                        onChange={(e)=>setEmail(e.target.value)}
-
                                         placeholder="Enter Email"
-
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
 
                                     />
@@ -155,16 +137,11 @@ if (data.role === "admin") {
 
                                         <input
 
-                                            type={showPassword ? "text":"password"}
-
+                                            type={showPassword ? "text" : "password"}
                                             className="form-control"
-
-                                            value={password}
-
-                                            onChange={(e)=>setPassword(e.target.value)}
-
                                             placeholder="Enter Password"
-
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             required
 
                                         />
@@ -172,14 +149,12 @@ if (data.role === "admin") {
                                         <button
 
                                             type="button"
-
                                             className="btn btn-outline-secondary"
-
-                                            onClick={()=>setShowPassword(!showPassword)}
+                                            onClick={() => setShowPassword(!showPassword)}
 
                                         >
 
-                                            {showPassword ? "Hide":"Show"}
+                                            {showPassword ? "Hide" : "Show"}
 
                                         </button>
 
@@ -192,19 +167,14 @@ if (data.role === "admin") {
                                     <input
 
                                         type="checkbox"
-
                                         className="form-check-input"
-
                                         id="remember"
 
                                     />
 
                                     <label
-
-                                        className="form-check-label"
-
                                         htmlFor="remember"
-
+                                        className="form-check-label"
                                     >
 
                                         Remember Me
@@ -214,11 +184,8 @@ if (data.role === "admin") {
                                 </div>
 
                                 <button
-
-                                    className="btn btn-warning w-100"
-
                                     type="submit"
-
+                                    className="btn btn-warning w-100"
                                 >
 
                                     Login
@@ -226,20 +193,25 @@ if (data.role === "admin") {
                                 </button>
 
                             </form>
-                                                        <div className="d-flex justify-content-between mt-3">
+
+                            <div className="d-flex justify-content-between mt-4">
 
                                 <Link
                                     to="/forgot-password"
                                     className="text-decoration-none"
                                 >
+
                                     Forgot Password?
+
                                 </Link>
 
                                 <Link
                                     to="/signup"
                                     className="text-decoration-none"
                                 >
+
                                     Create Account
+
                                 </Link>
 
                             </div>
@@ -252,132 +224,7 @@ if (data.role === "admin") {
 
             </div>
 
-        </section>
-
-        {/* Why Login */}
-
-        <section className="container my-5">
-
-            <h2 className="text-center mb-5">
-
-                Why Login?
-
-            </h2>
-
-            <div className="row">
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>📅</h1>
-
-                            <h4>View Schedule</h4>
-
-                            <p>
-
-                                Access your class timings and upcoming sessions.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>🎓</h1>
-
-                            <h4>Track Progress</h4>
-
-                            <p>
-
-                                Monitor your attendance and learning progress.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className="col-md-4 mb-4">
-
-                    <div className="card shadow h-100 text-center">
-
-                        <div className="card-body">
-
-                            <h1>🏆</h1>
-
-                            <h4>Competition Updates</h4>
-
-                            <p>
-
-                                Receive notifications about competitions and events.
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        {/* Need Help */}
-
-        <section className="container my-5">
-
-            <div className="card shadow">
-
-                <div className="card-body text-center">
-
-                    <h2>
-
-                        Need Help?
-
-                    </h2>
-
-                    <p>
-
-                        If you're having trouble logging in,
-                        contact our support team.
-
-                    </p>
-
-                    <p>
-
-                        📞 +91 9876543210
-
-                    </p>
-
-                    <p>
-
-                        ✉ support@danceflooracademy.com
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <Footer/>
-
-        </>
+        </div>
 
     );
 
