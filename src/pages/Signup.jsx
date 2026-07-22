@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
+import logo from "../assets/logo.png";
 
 function Signup() {
 
@@ -48,19 +49,14 @@ function Signup() {
                 method: "POST",
 
                 headers: {
-
                     "Content-Type": "application/json"
-
                 },
 
                 body: JSON.stringify({
 
                     name: `${formData.firstName} ${formData.lastName}`,
-
                     email: formData.email,
-
                     mobile: formData.mobile,
-
                     password: formData.password
 
                 })
@@ -93,7 +89,6 @@ function Signup() {
         catch (error) {
 
             console.error(error);
-
             alert("Unable to connect to server");
 
         }
@@ -102,252 +97,250 @@ function Signup() {
 
     return (
 
-        <div
-            className="container-fluid d-flex justify-content-center align-items-center bg-light"
-            style={{ minHeight: "100vh" }}
-        >
+        <div className="auth-page">
 
-            <div className="row w-100 justify-content-center">
+            <div className="auth-card">
 
-                <div className="col-md-8 col-lg-6">
+                <div className="text-center mb-4">
 
-                    <div className="card shadow-lg border-0 rounded-4">
+                    <img
+                        src={logo}
+                        alt="Dance Floor Logo"
+                        width="80"
+                        className="mb-3"
+                    />
 
-                        <div className="card-body p-5">
+                    <h1 className="auth-title">
 
-                            <div className="text-center mb-4">
+                        Create Account
 
-                                <h2 className="fw-bold text-warning">
-                                    Dance Floor Academy
-                                </h2>
+                    </h1>
 
-                                <p className="text-muted">
-                                    Create Your Account
-                                </p>
+                    <p className="auth-subtitle">
 
-                            </div>
+                        Join Dance Floor Academy and begin your dance journey.
 
-                            <form onSubmit={handleSubmit}>
+                    </p>
 
-                                <div className="row">
+                </div>
 
-                                    <div className="col-md-6 mb-3">
+                <form onSubmit={handleSubmit}>
 
-                                        <label className="form-label">
+                    <div className="row">
 
-                                            First Name
+                        <div className="col-md-6 mb-3">
 
-                                        </label>
+                            <label className="form-label">
 
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="firstName"
-                                            value={formData.firstName}
-                                            onChange={handleChange}
-                                            placeholder="Enter First Name"
-                                            required
-                                        />
+                                First Name
 
-                                    </div>
+                            </label>
 
-                                    <div className="col-md-6 mb-3">
+                            <input
+                                type="text"
+                                className="form-control py-3"
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                placeholder="First Name"
+                                required
+                            />
 
-                                        <label className="form-label">
+                        </div>
 
-                                            Last Name
+                        <div className="col-md-6 mb-3">
 
-                                        </label>
+                            <label className="form-label">
 
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="lastName"
-                                            value={formData.lastName}
-                                            onChange={handleChange}
-                                            placeholder="Enter Last Name"
-                                            required
-                                        />
+                                Last Name
 
-                                    </div>
+                            </label>
 
-                                </div>
-
-                                <div className="mb-3">
-
-                                    <label className="form-label">
-
-                                        Email
-
-                                    </label>
-
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="Enter Email"
-                                        required
-                                    />
-
-                                </div>
-
-                                <div className="mb-3">
-
-                                    <label className="form-label">
-
-                                        Mobile Number
-
-                                    </label>
-
-                                    <input
-                                        type="tel"
-                                        className="form-control"
-                                        name="mobile"
-                                        value={formData.mobile}
-                                        onChange={handleChange}
-                                        placeholder="Enter Mobile Number"
-                                        required
-                                    />
-
-                                </div>
-
-                                <div className="mb-3">
-
-                                    <label className="form-label">
-
-                                        Password
-
-                                    </label>
-
-                                    <div className="input-group">
-
-                                        <input
-                                            type={showPassword ? "text" : "password"}
-                                            className="form-control"
-                                            name="password"
-                                            value={formData.password}
-                                            onChange={handleChange}
-                                            placeholder="Enter Password"
-                                            required
-                                        />
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                        >
-                                            {showPassword ? "Hide" : "Show"}
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="mb-3">
-
-                                    <label className="form-label">
-
-                                        Confirm Password
-
-                                    </label>
-
-                                    <div className="input-group">
-
-                                        <input
-                                            type={showConfirmPassword ? "text" : "password"}
-                                            className="form-control"
-                                            name="confirmPassword"
-                                            value={formData.confirmPassword}
-                                            onChange={handleChange}
-                                            placeholder="Confirm Password"
-                                            required
-                                        />
-
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary"
-                                            onClick={() =>
-                                                setShowConfirmPassword(!showConfirmPassword)
-                                            }
-                                        >
-                                            {showConfirmPassword ? "Hide" : "Show"}
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="form-check mb-4">
-
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        id="terms"
-                                        required
-                                    />
-
-                                    <label
-                                        className="form-check-label"
-                                        htmlFor="terms"
-                                    >
-
-                                        I agree to the{" "}
-
-                                        <Link
-                                            to="/terms-conditions"
-                                            className="text-decoration-none"
-                                        >
-                                            Terms & Conditions
-                                        </Link>
-
-                                        {" "}and{" "}
-
-                                        <Link
-                                            to="/privacy-policy"
-                                            className="text-decoration-none"
-                                        >
-                                            Privacy Policy
-                                        </Link>
-
-                                    </label>
-
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="btn btn-warning w-100"
-                                >
-
-                                    Create Account
-
-                                </button>
-
-                            </form>
-
-                            <div className="text-center mt-4">
-
-                                <p className="mb-0">
-
-                                    Already have an account?
-
-                                    <Link
-                                        to="/login"
-                                        className="text-decoration-none ms-2"
-                                    >
-
-                                        Login
-
-                                    </Link>
-
-                                </p>
-
-                            </div>
+                            <input
+                                type="text"
+                                className="form-control py-3"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                placeholder="Last Name"
+                                required
+                            />
 
                         </div>
 
                     </div>
+
+                    <div className="mb-3">
+
+                        <label className="form-label">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="email"
+                            className="form-control py-3"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter your email"
+                            required
+                        />
+
+                    </div>
+
+                    <div className="mb-3">
+
+                        <label className="form-label">
+
+                            Mobile Number
+
+                        </label>
+
+                        <input
+                            type="tel"
+                            className="form-control py-3"
+                            name="mobile"
+                            value={formData.mobile}
+                            onChange={handleChange}
+                            placeholder="Enter your mobile number"
+                            required
+                        />
+
+                    </div>
+
+                    <div className="mb-3">
+
+                        <label className="form-label">
+
+                            Password
+
+                        </label>
+
+                        <div className="input-group">
+
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                className="form-control py-3"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Create Password"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+
+                                {showPassword ? "Hide" : "Show"}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div className="mb-3">
+
+                        <label className="form-label">
+
+                            Confirm Password
+
+                        </label>
+
+                        <div className="input-group">
+
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                className="form-control py-3"
+                                name="confirmPassword"
+                                value={formData.confirmPassword}
+                                onChange={handleChange}
+                                placeholder="Confirm Password"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={() =>
+                                    setShowConfirmPassword(!showConfirmPassword)
+                                }
+                            >
+
+                                {showConfirmPassword ? "Hide" : "Show"}
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div className="form-check mb-4">
+
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="terms"
+                            required
+                        />
+
+                        <label
+                            className="form-check-label text-white"
+                            htmlFor="terms"
+                        >
+
+                            I agree to the{" "}
+
+                            <Link to="/terms">
+
+                                Terms & Conditions
+
+                            </Link>
+
+                            {" "}and{" "}
+
+                            <Link to="/privacy">
+
+                                Privacy Policy
+
+                            </Link>
+
+                        </label>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-warning w-100 py-3"
+                    >
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+                <div className="text-center mt-4">
+
+                    <p className="text-white mb-0">
+
+                        Already have an account?
+
+                        <Link
+                            to="/login"
+                            className="ms-2"
+                        >
+
+                            Login
+
+                        </Link>
+
+                    </p>
 
                 </div>
 

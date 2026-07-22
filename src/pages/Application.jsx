@@ -2,6 +2,8 @@ import { useState } from "react";
 import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import aboutBg from "../assets/images/about-bg.png";
+
 
 function Application() {
 
@@ -88,25 +90,28 @@ function Application() {
 
             {/* Hero */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
+    <div className="container text-center">
 
-                <div className="container text-center">
+        <h1 className="display-2 fw-bold">
+            Student Application
+        </h1>
 
-                    <h1 className="display-3 fw-bold">
+        <p className="lead mt-4">
+            Begin your dance journey with Dance Floor Academy today.
+        </p>
 
-                        Student Application
-
-                    </h1>
-
-                    <p className="lead">
-
-                        Register today and start your dance journey.
-
-                    </p>
-
-                </div>
-
-            </section>
+    </div>
+</section>
 
             {/* Application Form */}
 

@@ -1,7 +1,10 @@
 import heroImage from "../assets/images/hero.jpg";
 import heroDancer from "../assets/images/dance1.png";
 
+import { Link } from "react-router-dom";
+
 function Hero() {
+    
 
     return (
 
@@ -44,17 +47,13 @@ function Hero() {
 
                         </p>
 
-                        <button className="btn btn-warning btn-lg me-3">
+                        <Link to="/application" className="btn btn-warning btn-lg me-3">
+    Join Now
+</Link>
 
-                            Join Now
-
-                        </button>
-
-                        <button className="btn btn-outline-light btn-lg">
-
-                            Learn More
-
-                        </button>
+<Link to="/about" className="btn btn-outline-light btn-lg">
+    Learn More
+</Link>
 
                     </div>
 

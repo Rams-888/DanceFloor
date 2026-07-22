@@ -1,95 +1,296 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+
+import aboutBg from "../assets/images/about-bg.png";
+import studentAvatar from "../assets/images/student-avatar.png";
+
 function Student() {
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
+    const [user, setUser] = useState(null);
 
-    console.log(user);
+    const [editData, setEditData] = useState({
+
+        name: "",
+        mobile: ""
+
+    });
+
+    useEffect(() => {
+
+        const fetchStudent = async () => {
+
+            try {
+
+                const res = await axios.get(
+
+                    `http://localhost:5000/api/users/${loggedInUser._id}`
+
+                );
+
+                setUser(res.data);
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+            }
+
+        };
+
+        if (loggedInUser?._id) {
+
+            fetchStudent();
+
+        }
+
+    }, [loggedInUser]);
+
+    const updateProfile = async () => {
+
+        try {
+
+            const res = await axios.put(
+
+                `http://localhost:5000/api/users/${user._id}`,
+
+                {
+
+                    name: editData.name,
+
+                    mobile: editData.mobile
+
+                }
+
+            );
+
+            setUser(res.data.user);
+
+            localStorage.setItem(
+
+                "user",
+
+                JSON.stringify(res.data.user)
+
+            );
+
+            alert("Profile Updated Successfully");
+
+            window.location.reload();
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            alert("Update Failed");
+
+        }
+
+    };
+
+    if (!user) {
+
+        return (
+
+            <div className="text-center mt-5">
+
+                <h3>Loading...</h3>
+
+            </div>
+
+        );
+
+    }
 
     return (
 
-        <>
+    <>
 
-            <Navbar />
+        <Navbar />
 
-            {/* Hero Section */}
+        {/* Hero Section */}
 
-            <section className="bg-dark text-white py-5">
+        <section
+            className="text-white d-flex align-items-center justify-content-center"
+            style={{
+                backgroundImage: `linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)), url(${aboutBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                minHeight: "55vh"
+            }}
+        >
 
-                <div className="container text-center">
+            <div className="text-center">
 
-                    <h1 className="display-3 fw-bold">
+                <h1 className="display-2 fw-bold">
 
-                        Student Dashboard
+                    Student Dashboard
 
-                    </h1>
+                </h1>
 
-                    <p className="lead">
+                <p className="lead mt-3">
 
-                        Welcome back! Here's your learning progress.
+                    Welcome back! Here's your learning progress.
 
-                    </p>
+                </p>
 
-                </div>
+            </div>
 
-            </section>
+        </section>
 
-            {/* Student Profile */}
+        {/* Student Profile */}
 
-            <section className="container my-5">
+        <section className="container my-5">
 
-                <div className="card shadow">
+            <div className="card shadow-lg border-0 rounded-4">
 
-                    <div className="card-body">
+                <div className="card-body p-4">
 
-                        <div className="row align-items-center">
+                    <div className="row align-items-center">
 
-                            <div className="col-md-3 text-center">
+                        {/* Left */}
 
-                                <img
+                        <div className="col-md-3 text-center">
 
-                                    src="https://via.placeholder.com/180"
+                            <img
 
-                                    className="img-fluid rounded-circle"
+                                src={studentAvatar}
 
-                                    alt="Student"
+                                alt="Student"
 
-                                />
+                                className="rounded-circle shadow"
 
-                            </div>
+                                style={{
 
-                            <div className="col-md-9">
+                                    width: "130px",
 
-                                <h2>
+                                    height: "130px",
 
-                                    {user?.name}
+                                    objectFit: "cover",
+
+                                    border: "4px solid #ffc107"
+
+                                }}
+
+                            />
+
+                            <h4 className="fw-bold mt-3">
+
+                                {user.name}
+
+                            </h4>
+
+                        </div>
+
+                        {/* Right */}
+
+                        <div className="col-md-9">
+
+                            <div className="d-flex justify-content-between align-items-center mb-4">
+
+                                <h2 className="fw-bold mb-0">
+
+                                    Student Information
 
                                 </h2>
 
-                                <p>
+                                <button
 
-                                    Email : {user?.email}
+                                    className="btn btn-warning"
 
-                                </p>
+                                    data-bs-toggle="modal"
 
-                                <p>
+                                    data-bs-target="#editProfileModal"
 
-                                    Course : Hip-Hop Dance
+                                    onClick={() =>
 
-                                </p>
+                                        setEditData({
 
-                                <p>
+                                            name: user.name,
 
-                                    Batch : Evening
+                                            mobile: user.mobile
 
-                                </p>
+                                        })
 
-                                <p>
+                                    }
 
-                                    Instructor : Alex Johnson
+                                >
 
-                                </p>
+                                    Edit Profile
+
+                                </button>
+
+                            </div>
+
+                            <div className="row">
+
+                                <div className="col-md-6 mb-3">
+
+                                    <strong>Email</strong>
+
+                                    <p className="mb-0">
+
+                                        {user.email}
+
+                                    </p>
+
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+
+                                    <strong>Mobile</strong>
+
+                                    <p className="mb-0">
+
+                                        {user.mobile}
+
+                                    </p>
+
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+
+                                    <strong>Course</strong>
+
+                                    <p className="mb-0">
+
+                                        {user.course || "Not Assigned"}
+
+                                    </p>
+
+                                </div>
+
+                                <div className="col-md-6 mb-3">
+
+                                    <strong>Batch</strong>
+
+                                    <p className="mb-0">
+
+                                        {user.batch || "Not Assigned"}
+
+                                    </p>
+
+                                </div>
+
+                                <div className="col-md-6">
+
+                                    <strong>Instructor</strong>
+
+                                    <p className="mb-0">
+
+                                        {user.instructor || "Not Assigned"}
+
+                                    </p>
+
+                                </div>
 
                             </div>
 
@@ -99,113 +300,67 @@ function Student() {
 
                 </div>
 
-            </section>
+            </div>
 
-            {/* Dashboard Cards */}
+        </section>
+
+        {/* Dashboard Cards */}
 
             <section className="container my-5">
 
-                <div className="row">
+                <div className="row g-4">
 
-                    <div className="col-md-3 mb-4">
+                    <div className="col-md-3">
 
-                        <div className="card shadow text-center">
+                        <div className="card shadow border-0 rounded-4 text-center p-4">
 
-                            <div className="card-body">
+                            <div className="display-4 mb-3">🎓</div>
 
-                                <h1>📚</h1>
+                            <h5>Courses</h5>
 
-                                <h3>
-
-                                    6
-
-                                </h3>
-
-                                <p>
-
-                                    Courses
-
-                                </p>
-
-                            </div>
+                            <h2 className="fw-bold">6</h2>
 
                         </div>
 
                     </div>
 
-                    <div className="col-md-3 mb-4">
+                    <div className="col-md-3">
 
-                        <div className="card shadow text-center">
+                        <div className="card shadow border-0 rounded-4 text-center p-4">
 
-                            <div className="card-body">
+                            <div className="display-4 mb-3">📅</div>
 
-                                <h1>📅</h1>
+                            <h5>Attendance</h5>
 
-                                <h3>
-
-                                    92%
-
-                                </h3>
-
-                                <p>
-
-                                    Attendance
-
-                                </p>
-
-                            </div>
+                            <h2 className="fw-bold">88%</h2>
 
                         </div>
 
                     </div>
 
-                    <div className="col-md-3 mb-4">
+                    <div className="col-md-3">
 
-                        <div className="card shadow text-center">
+                        <div className="card shadow border-0 rounded-4 text-center p-4">
 
-                            <div className="card-body">
+                            <div className="display-4 mb-3">🏆</div>
 
-                                <h1>🏆</h1>
+                            <h5>Achievements</h5>
 
-                                <h3>
-
-                                    8
-
-                                </h3>
-
-                                <p>
-
-                                    Awards
-
-                                </p>
-
-                            </div>
+                            <h2 className="fw-bold">8</h2>
 
                         </div>
 
                     </div>
 
-                    <div className="col-md-3 mb-4">
+                    <div className="col-md-3">
 
-                        <div className="card shadow text-center">
+                        <div className="card shadow border-0 rounded-4 text-center p-4">
 
-                            <div className="card-body">
+                            <div className="display-4 mb-3">🎭</div>
 
-                                <h1>🎭</h1>
+                            <h5>Events</h5>
 
-                                <h3>
-
-                                    15
-
-                                </h3>
-
-                                <p>
-
-                                    Performances
-
-                                </p>
-
-                            </div>
+                            <h2 className="fw-bold">15</h2>
 
                         </div>
 
@@ -219,7 +374,7 @@ function Student() {
 
             <section className="container my-5">
 
-                <div className="card shadow">
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body">
 
@@ -229,7 +384,7 @@ function Student() {
 
                         </h2>
 
-                        <table className="table table-bordered table-hover">
+                        <table className="table table-bordered table-hover align-middle">
 
                             <thead className="table-dark">
 
@@ -286,11 +441,12 @@ function Student() {
                 </div>
 
             </section>
-                        {/* Enrolled Courses */}
+
+            {/* Enrolled Courses */}
 
             <section className="container my-5">
 
-                <div className="card shadow">
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body">
 
@@ -304,7 +460,7 @@ function Student() {
 
                             <div className="col-md-4 mb-3">
 
-                                <div className="card border-primary">
+                                <div className="card border-primary h-100">
 
                                     <div className="card-body text-center">
 
@@ -320,7 +476,7 @@ function Student() {
 
                             <div className="col-md-4 mb-3">
 
-                                <div className="card border-success">
+                                <div className="card border-success h-100">
 
                                     <div className="card-body text-center">
 
@@ -336,7 +492,7 @@ function Student() {
 
                             <div className="col-md-4 mb-3">
 
-                                <div className="card border-warning">
+                                <div className="card border-warning h-100">
 
                                     <div className="card-body text-center">
 
@@ -357,12 +513,11 @@ function Student() {
                 </div>
 
             </section>
-
-            {/* Recent Achievements */}
+                        {/* Recent Achievements */}
 
             <section className="container my-5">
 
-                <div className="card shadow">
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body">
 
@@ -406,11 +561,11 @@ function Student() {
 
             </section>
 
-            {/* Announcements */}
+            {/* Latest Announcements */}
 
             <section className="container my-5">
 
-                <div className="card shadow">
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body">
 
@@ -422,8 +577,7 @@ function Student() {
 
                         <div className="alert alert-primary">
 
-                            🎉 Annual Dance Festival registration starts
-                            next week.
+                            🎉 Annual Dance Festival registration starts next week.
 
                         </div>
 
@@ -435,8 +589,7 @@ function Student() {
 
                         <div className="alert alert-warning">
 
-                            📢 Weekend special choreography workshop
-                            available.
+                            📢 Weekend special choreography workshop available.
 
                         </div>
 
@@ -446,11 +599,11 @@ function Student() {
 
             </section>
 
-            {/* Contact */}
+            {/* Student Support */}
 
             <section className="container my-5">
 
-                <div className="card shadow">
+                <div className="card shadow border-0 rounded-4">
 
                     <div className="card-body text-center">
 
@@ -483,12 +636,197 @@ function Student() {
                 </div>
 
             </section>
+            {/* Edit Profile Modal */}
 
-            <Footer />
+<div
+    className="modal fade"
+    id="editProfileModal"
+    tabIndex="-1"
+    aria-labelledby="editProfileModalLabel"
+    aria-hidden="true"
+>
 
-        </>
+    <div className="modal-dialog modal-dialog-centered">
 
-    );
+        <div className="modal-content">
+
+            <div className="modal-header">
+
+                <h5
+                    className="modal-title"
+                    id="editProfileModalLabel"
+                >
+
+                    Edit Profile
+
+                </h5>
+
+                <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+            <div className="modal-body">
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={editData.name}
+                        onChange={(e) =>
+                            setEditData({
+                                ...editData,
+                                name: e.target.value
+                            })
+                        }
+                    />
+
+                </div>
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Mobile
+
+                    </label>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={editData.mobile}
+                        onChange={(e) =>
+                            setEditData({
+                                ...editData,
+                                mobile: e.target.value
+                            })
+                        }
+                    />
+
+                </div>
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Email
+
+                    </label>
+
+                    <input
+                        type="email"
+                        className="form-control"
+                        value={user.email}
+                        disabled
+                    />
+
+                    <small className="text-muted">
+
+                        Email cannot be changed.
+
+                    </small>
+
+                </div>
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Course
+
+                    </label>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={user.course || "Not Assigned"}
+                        disabled
+                    />
+
+                </div>
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Batch
+
+                    </label>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={user.batch || "Not Assigned"}
+                        disabled
+                    />
+
+                </div>
+
+                <div className="mb-3">
+
+                    <label className="form-label">
+
+                        Instructor
+
+                    </label>
+
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={user.instructor || "Not Assigned"}
+                        disabled
+                    />
+
+                </div>
+
+            </div>
+
+            <div className="modal-footer">
+
+                <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={updateProfile}
+                >
+
+                    Save Changes
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<Footer />
+
+</>
+
+);
 
 }
 

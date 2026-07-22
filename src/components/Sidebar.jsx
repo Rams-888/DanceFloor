@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Sidebar() {
 
     return (
 
-        <div className="bg-dark text-white min-vh-100 p-3">
+        <div
+    className="text-white min-vh-100 p-4"
+    style={{
+        background: "#1f2329",
+        width: "260px"
+    }}
+>
 
             <h3 className="text-center mb-4">
 
@@ -14,47 +20,60 @@ function Sidebar() {
 
             <ul className="nav flex-column">
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/dashboard">
-                        Dashboard
-                    </Link>
-                </li>
+                <NavLink
+    to="/admin/dashboard"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    📊 Dashboard
+</NavLink>
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/students">
-                        Students
-                    </Link>
-                </li>
+                <NavLink
+    to="/admin/students"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    👨‍🎓 Students
+</NavLink>
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/applications">
-                        Applications
-                    </Link>
-                </li>
+                <NavLink
+    to="/admin/applications"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    📝 Applications
+</NavLink>
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/enquiries">
-                        Enquiries
-                    </Link>
-                </li>
+                <NavLink
+    to="/admin/enquiries"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    📨 Enquiries
+</NavLink>
+                <NavLink
+    to="/admin/courses"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    📚 Courses
+</NavLink>
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/courses">
-                        Courses
-                    </Link>
-                </li>
+                <NavLink
+    to="/admin/sessions"
+    className={({ isActive }) =>
+        `nav-link sidebar-link ${isActive ? "sidebar-active" : "text-white"}`
+    }
+>
+    📅 Sessions
+</NavLink>
 
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/sessions">
-                        Sessions
-                    </Link>
-                </li>
-
-                <li className="nav-item mb-3">
-                    <Link className="nav-link text-white" to="/admin/profile">
-                        Profile
-                    </Link>
-                </li>
+                
 
                 <li className="nav-item mt-5">
                     <Link className="btn btn-danger w-100" to="/">

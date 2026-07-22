@@ -103,3 +103,228 @@ body{
     height:48px;
     object-fit:contain;
 }
+.auth-page{
+    min-height:100vh;
+    background:
+        linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+        url("./assets/images/about-bg.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px 20px;
+}
+
+.auth-card{
+    width:100%;
+    max-width:520px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:22px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+    padding:40px;
+}
+
+.auth-title{
+    color:#ffc107;
+    font-size:2.4rem;
+    font-weight:700;
+}
+
+.auth-subtitle{
+    color:white;
+    margin-bottom:30px;
+}
+
+.auth-card label{
+    color:white;
+    font-weight:500;
+}
+
+.auth-card .form-control{
+    background:rgba(255,255,255,.15);
+    color:white;
+    border:none;
+}
+
+.auth-card .form-control::placeholder{
+    color:#dddddd;
+}
+
+.auth-card .form-control:focus{
+    background:rgba(255,255,255,.2);
+    color:white;
+    box-shadow:none;
+}
+
+.auth-card .btn-warning{
+    font-weight:600;
+    border-radius:10px;
+}
+
+.auth-card a{
+    color:#ffd54f;
+}
+
+.auth-card a:hover{
+    color:white;
+}
+.auth-card .btn-warning{
+    transition:0.3s;
+}
+
+.auth-card .btn-warning:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(255,193,7,.35);
+}
+.auth-card{
+    animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+.dashboard-card{
+
+    border-radius:20px;
+    min-height:220px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.dashboard-icon{
+
+    font-size:55px;
+
+}
+
+.dashboard-count{
+
+    font-size:50px;
+
+    font-weight:700;
+
+    color:#212529;
+
+}
+.sidebar-link{
+
+    border-radius:12px;
+
+    padding:12px 18px;
+
+    transition:.3s;
+
+    font-size:17px;
+
+}
+
+.sidebar-link:hover{
+
+    background:#ffc107;
+
+    color:#212529 !important;
+
+    transform:translateX(6px);
+
+}
+.sidebar-active{
+
+    background:#ffc107;
+
+    color:#212529 !important;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    box-shadow:0 8px 20px rgba(255,193,7,.25);
+
+}
+.student-card{
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    transition:.3s;
+
+}
+
+.student-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.stat-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:35px;
+
+    margin:auto;
+
+    background:#ffc107;
+
+    color:#fff;
+
+}
+.dashboard-stat-card{
+    transition:0.3s;
+    border-radius:20px;
+}
+
+.dashboard-stat-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(0,0,0,.15);
+}

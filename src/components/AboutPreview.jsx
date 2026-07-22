@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function AboutPreview() {
     return (
 
@@ -32,11 +33,12 @@ function AboutPreview() {
 
                     <div className="text-center mt-4">
 
-                        <button className="btn btn-warning btn-lg">
-
-                            Learn More
-
-                        </button>
+                        <Link
+    to="/about"
+    className="btn btn-warning btn-lg"
+>
+    Learn More
+</Link>
 
                     </div>
 

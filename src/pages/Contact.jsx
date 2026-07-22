@@ -2,6 +2,7 @@ import { useState } from "react";
 import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import aboutBg from "../assets/images/about-bg.png";
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -85,25 +86,28 @@ const handleSubmit = async (event) => {
 
             {/* Hero */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
+    <div className="container text-center">
 
-                <div className="container text-center">
+        <h1 className="display-2 fw-bold">
+            Contact Us
+        </h1>
 
-                    <h1 className="display-3 fw-bold">
+        <p className="lead mt-4">
+            We'd love to hear from you. Get in touch with our team today.
+        </p>
 
-                        Contact Us
-
-                    </h1>
-
-                    <p className="lead">
-
-                        We'd love to hear from you.
-
-                    </p>
-
-                </div>
-
-            </section>
+    </div>
+</section>
 
             {/* Contact Information */}
 
@@ -550,95 +554,7 @@ const handleSubmit = async (event) => {
 
             </section>
 
-            {/* FAQ */}
-
-            <section className="container my-5">
-
-                <div className="card shadow">
-
-                    <div className="card-body">
-
-                        <h2 className="text-center mb-4">
-
-                            Frequently Asked Questions
-
-                        </h2>
-
-                        <div className="accordion" id="contactFAQ">
-
-                            <div className="accordion-item">
-
-                                <h2 className="accordion-header">
-
-                                    <button
-                                        className="accordion-button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#faq1"
-                                    >
-
-                                        Do you offer trial classes?
-
-                                    </button>
-
-                                </h2>
-
-                                <div
-                                    id="faq1"
-                                    className="accordion-collapse collapse show"
-                                    data-bs-parent="#contactFAQ"
-                                >
-
-                                    <div className="accordion-body">
-
-                                        Yes, every new student can attend
-                                        one free trial class.
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div className="accordion-item">
-
-                                <h2 className="accordion-header">
-
-                                    <button
-                                        className="accordion-button collapsed"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#faq2"
-                                    >
-
-                                        What is the minimum age?
-
-                                    </button>
-
-                                </h2>
-
-                                <div
-                                    id="faq2"
-                                    className="accordion-collapse collapse"
-                                    data-bs-parent="#contactFAQ"
-                                >
-
-                                    <div className="accordion-body">
-
-                                        Children aged 4 years and above
-                                        can join.
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
+            
 
             <Footer />
 

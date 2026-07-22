@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import aboutBg from "../assets/images/about-bg.png";
 
 function Terms() {
 
@@ -11,26 +12,30 @@ function Terms() {
 
             {/* Hero Section */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
 
-                <div className="container text-center">
+    <div className="container text-center">
 
-                    <h1 className="display-3 fw-bold">
+        <h1 className="display-2 fw-bold">
+            Terms & Conditions
+        </h1>
 
-                        Terms & Conditions
+        <p className="lead mt-4">
+            Please read these terms carefully before using Dance Floor Academy services.
+        </p>
 
-                    </h1>
+    </div>
 
-                    <p className="lead">
-
-                        Please read these terms carefully before using our services.
-
-                    </p>
-
-                </div>
-
-            </section>
-
+</section>
             {/* Introduction */}
 
             <section className="container my-5">

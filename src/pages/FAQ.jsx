@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import { Link } from "react-router-dom";
+import aboutBg from "../assets/images/about-bg.png";
 function FAQ() {
 
     return (
@@ -11,25 +12,28 @@ function FAQ() {
 
             {/* Hero Section */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
+    <div className="container text-center">
 
-                <div className="container text-center">
+        <h1 className="display-2 fw-bold">
+            Frequently Asked Questions
+        </h1>
 
-                    <h1 className="display-3 fw-bold">
+        <p className="lead mt-4">
+            Find answers to the questions our students ask most often.
+        </p>
 
-                        Frequently Asked Questions
-
-                    </h1>
-
-                    <p className="lead">
-
-                        Find answers to the most commonly asked questions.
-
-                    </p>
-
-                </div>
-
-            </section>
+    </div>
+</section>
 
             {/* FAQ Accordion */}
 
@@ -364,11 +368,12 @@ function FAQ() {
 
                         </p>
 
-                        <button className="btn btn-dark btn-lg">
-
-                            Apply Now
-
-                        </button>
+                        <Link
+    to="/application"
+    className="btn btn-dark btn-lg"
+>
+    Apply Now
+</Link>
 
                     </div>
 

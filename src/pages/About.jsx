@@ -1,9 +1,10 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-
+import { Link } from "react-router-dom";
 import trainer1 from "../assets/images/men.jpg";
 import trainer2 from "../assets/images/women1.jpg";
 import trainer3 from "../assets/images/women2.jpg";
+import aboutBg from "../assets/images/about-bg.png";
 
 function About() {
 
@@ -15,26 +16,28 @@ function About() {
 
             {/* Hero Section */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
+    <div className="container text-center">
 
-                <div className="container text-center">
+        <h1 className="display-2 fw-bold">
+            About Dance Floor Academy
+        </h1>
 
-                    <h1 className="display-3 fw-bold">
+        <p className="lead mt-4">
+            Empowering dancers with passion, creativity and excellence.
+        </p>
 
-                        About Dance Floor Academy
-
-                    </h1>
-
-                    <p className="lead">
-
-                        Empowering dancers with passion,
-                        creativity and excellence.
-
-                    </p>
-
-                </div>
-
-            </section>
+    </div>
+</section>
 
             {/* Our Story */}
 
@@ -678,11 +681,12 @@ function About() {
 
                         </p>
 
-                        <button className="btn btn-warning btn-lg">
-
-                            Apply Now
-
-                        </button>
+                        <Link
+    to="/application"
+    className="btn btn-warning btn-lg"
+>
+    Apply Now
+</Link>
 
                     </div>
 

@@ -1,6 +1,7 @@
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import DashboardCards from "../components/DashboardCards";
+import RecentApplications from "../components/RecentApplications";
 
 
 function AdminDashboard() {
@@ -18,11 +19,18 @@ function AdminDashboard() {
 
                 </div>
 
-                <div className="col-md-10 bg-light min-vh-100">
+                <div
+    className="col-md-10 min-vh-100"
+    style={{
+        background: "#f4f6f9"
+    }}
+>
 
                     <Topbar />
 
                     <DashboardCards />
+
+                    <RecentApplications />
 
                 </div>
 

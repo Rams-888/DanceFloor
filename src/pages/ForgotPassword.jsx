@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 function ForgotPassword() {
 
@@ -19,90 +20,94 @@ function ForgotPassword() {
 
     return (
 
-        <div
-            className="container-fluid d-flex justify-content-center align-items-center bg-light"
-            style={{ minHeight: "100vh" }}
-        >
+        <div className="auth-page">
 
-            <div className="row w-100 justify-content-center">
+            <div className="auth-card">
 
-                <div className="col-md-6 col-lg-5">
+                <div className="text-center mb-4">
 
-                    <div className="card shadow-lg border-0 rounded-4">
+                    <img
+                        src={logo}
+                        alt="Dance Floor Logo"
+                        width="80"
+                        className="mb-3"
+                    />
 
-                        <div className="card-body p-5">
+                    <h1 className="auth-title">
 
-                            <div className="text-center mb-4">
+                        Forgot Password
 
-                                <h2 className="fw-bold text-warning">
-                                    Dance Floor Academy
-                                </h2>
+                    </h1>
 
-                                <p className="text-muted">
-                                    Forgot your password?
-                                </p>
+                    <p className="auth-subtitle">
 
-                            </div>
+                        Enter your registered details to receive a password reset link.
 
-                            <form onSubmit={handleSubmit}>
+                    </p>
 
-                                <div className="mb-3">
+                </div>
 
-                                    <label className="form-label">
-                                        Registered Email
-                                    </label>
+                <form onSubmit={handleSubmit}>
 
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        placeholder="Enter Registered Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
+                    <div className="mb-3">
 
-                                </div>
+                        <label className="form-label">
 
-                                <div className="mb-4">
+                            Registered Email
 
-                                    <label className="form-label">
-                                        Registered Phone Number
-                                    </label>
+                        </label>
 
-                                    <input
-                                        type="tel"
-                                        className="form-control"
-                                        placeholder="Enter Registered Phone Number"
-                                        value={phone}
-                                        onChange={(e) => setPhone(e.target.value)}
-                                        required
-                                    />
-
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="btn btn-warning w-100"
-                                >
-                                    Send Reset Link
-                                </button>
-
-                            </form>
-
-                            <div className="text-center mt-4">
-
-                                <Link
-                                    to="/login"
-                                    className="text-decoration-none"
-                                >
-                                    ← Back to Login
-                                </Link>
-
-                            </div>
-
-                        </div>
+                        <input
+                            type="email"
+                            className="form-control py-3"
+                            placeholder="Enter your registered email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
 
                     </div>
+
+                    <div className="mb-4">
+
+                        <label className="form-label">
+
+                            Registered Phone Number
+
+                        </label>
+
+                        <input
+                            type="tel"
+                            className="form-control py-3"
+                            placeholder="Enter your registered phone number"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            required
+                        />
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-warning w-100 py-3"
+                    >
+
+                        Send Reset Link
+
+                    </button>
+
+                </form>
+
+                <div className="text-center mt-4">
+
+                    <Link
+                        to="/login"
+                        className="text-decoration-none"
+                    >
+
+                        ← Back to Login
+
+                    </Link>
 
                 </div>
 

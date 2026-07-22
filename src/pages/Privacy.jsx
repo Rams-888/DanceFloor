@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import aboutBg from "../assets/images/about-bg.png";
 
 function Privacy() {
 
@@ -11,25 +12,30 @@ function Privacy() {
 
             {/* Hero Section */}
 
-            <section className="bg-dark text-white py-5">
+            <section
+    className="text-white d-flex align-items-center"
+    style={{
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${aboutBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "60vh"
+    }}
+>
 
-                <div className="container text-center">
+    <div className="container text-center">
 
-                    <h1 className="display-3 fw-bold">
+        <h1 className="display-2 fw-bold">
+            Privacy Policy
+        </h1>
 
-                        Privacy Policy
+        <p className="lead mt-4">
+            Your privacy matters to us. Learn how we collect, use, and protect your information.
+        </p>
 
-                    </h1>
+    </div>
 
-                    <p className="lead">
-
-                        Your privacy and personal information are important to us.
-
-                    </p>
-
-                </div>
-
-            </section>
+</section>
 
             {/* Introduction */}
 

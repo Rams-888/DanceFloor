@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../config";
+import logo from "../assets/logo.png";
 
 function Login() {
 
@@ -28,16 +29,12 @@ function Login() {
                 method: "POST",
 
                 headers: {
-
                     "Content-Type": "application/json"
-
                 },
 
                 body: JSON.stringify({
-
                     email,
                     password
-
                 })
 
             });
@@ -77,148 +74,138 @@ function Login() {
 
     return (
 
-        <div
-            className="container-fluid d-flex justify-content-center align-items-center bg-light"
-            style={{ minHeight: "100vh" }}
-        >
+        <div className="auth-page">
 
-            <div className="row w-100 justify-content-center">
+            <div className="auth-card">
 
-                <div className="col-md-6 col-lg-4">
+                <div className="text-center mb-4">
 
-                    <div className="card shadow-lg border-0 rounded-4">
+                    <img
+                        src={logo}
+                        alt="Dance Floor Logo"
+                        width="80"
+                        className="mb-3"
+                    />
 
-                        <div className="card-body p-5">
+                    <h1 className="auth-title">
 
-                            <div className="text-center mb-4">
+                        Welcome Back
 
-                                <h2 className="fw-bold text-warning">
-                                    Dance Floor Academy
-                                </h2>
+                    </h1>
 
-                                <p className="text-muted">
-                                    Welcome Back!
-                                </p>
+                    <p className="auth-subtitle">
 
-                            </div>
+                        Sign in to continue your dance journey.
 
-                            <form onSubmit={handleSubmit}>
+                    </p>
 
-                                <div className="mb-3">
+                </div>
 
-                                    <label className="form-label">
+                <form onSubmit={handleSubmit}>
 
-                                        Email
+                    <div className="mb-3">
 
-                                    </label>
+                        <label className="form-label">
 
-                                    <input
+                            Email
 
-                                        type="email"
-                                        className="form-control"
-                                        placeholder="Enter Email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
+                        </label>
 
-                                    />
+                        <input
+    type="email"
+    className="form-control py-3"
+    placeholder="Enter your email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+/>
 
-                                </div>
+                    </div>
 
-                                <div className="mb-3">
+                    <div className="mb-3">
 
-                                    <label className="form-label">
+                        <label className="form-label">
 
-                                        Password
+                            Password
 
-                                    </label>
+                        </label>
 
-                                    <div className="input-group">
+                        <div className="input-group">
 
-                                        <input
+                            <input
+    type={showPassword ? "text" : "password"}
+    className="form-control py-3"
+    placeholder="Enter your password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+/>
 
-                                            type={showPassword ? "text" : "password"}
-                                            className="form-control"
-                                            placeholder="Enter Password"
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                            required
+                            <button
 
-                                        />
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={() => setShowPassword(!showPassword)}
 
-                                        <button
+                            >
 
-                                            type="button"
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => setShowPassword(!showPassword)}
+                                {showPassword ? "Hide" : "Show"}
 
-                                        >
-
-                                            {showPassword ? "Hide" : "Show"}
-
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="form-check mb-3">
-
-                                    <input
-
-                                        type="checkbox"
-                                        className="form-check-input"
-                                        id="remember"
-
-                                    />
-
-                                    <label
-                                        htmlFor="remember"
-                                        className="form-check-label"
-                                    >
-
-                                        Remember Me
-
-                                    </label>
-
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="btn btn-warning w-100"
-                                >
-
-                                    Login
-
-                                </button>
-
-                            </form>
-
-                            <div className="d-flex justify-content-between mt-4">
-
-                                <Link
-                                    to="/forgot-password"
-                                    className="text-decoration-none"
-                                >
-
-                                    Forgot Password?
-
-                                </Link>
-
-                                <Link
-                                    to="/signup"
-                                    className="text-decoration-none"
-                                >
-
-                                    Create Account
-
-                                </Link>
-
-                            </div>
+                            </button>
 
                         </div>
 
                     </div>
+
+                    <div className="form-check mb-4">
+
+                        <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="remember"
+                        />
+
+                        <label
+                            htmlFor="remember"
+                            className="form-check-label text-white"
+                        >
+
+                            Remember Me
+
+                        </label>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="btn btn-warning w-100 py-3"
+                    >
+
+                        Login
+
+                    </button>
+
+                </form>
+
+                <div className="d-flex justify-content-between mt-4">
+
+                    <Link
+                        to="/forgot-password"
+                        className="text-decoration-none"
+                    >
+
+                        Forgot Password?
+
+                    </Link>
+
+                    <Link
+                        to="/signup"
+                        className="text-decoration-none"
+                    >
+
+                        Create Account
+
+                    </Link>
 
                 </div>
 

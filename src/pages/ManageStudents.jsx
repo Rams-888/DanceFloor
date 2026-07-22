@@ -7,6 +7,16 @@ function ManageStudents() {
 
     const [students, setStudents] = useState([]);
 
+    const [selectedStudent, setSelectedStudent] = useState(null);
+
+    const [editData, setEditData] = useState({
+        name: "",
+        mobile: "",
+        course: "",
+        batch: "",
+        instructor: ""
+    });
+
     const fetchStudents = async () => {
 
         try {
@@ -49,87 +59,364 @@ function ManageStudents() {
 
     };
 
+    const openEditModal = (student) => {
+
+        setSelectedStudent(student);
+
+        setEditData({
+
+            name: student.name,
+
+            mobile: student.mobile,
+
+            course: student.course || "",
+
+            batch: student.batch || "",
+
+            instructor: student.instructor || ""
+
+        });
+
+    };
+
+    const saveStudentChanges = async () => {
+
+        try {
+
+            const response = await fetch(
+
+                `${API_URL}/api/users/${selectedStudent._id}`,
+
+                {
+
+                    method: "PUT",
+
+                    headers: {
+
+                        "Content-Type": "application/json"
+
+                    },
+
+                    body: JSON.stringify(editData)
+
+                }
+
+            );
+
+            if (response.ok) {
+
+                alert("Student Updated Successfully");
+
+                fetchStudents();
+
+            } else {
+
+                alert("Update Failed");
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
+
     return (
 
-        <div className="container-fluid">
+        <>
 
-            <div className="row">
+            <div className="container-fluid">
 
-                <div className="col-md-2 p-0">
+                <div className="row">
 
-                    <Sidebar />
+                    <div className="col-md-2 p-0">
+
+                        <Sidebar />
+
+                    </div>
+
+                    <div className="col-md-10">
+
+                        <Topbar />
+
+                        <div className="container mt-4">
+
+                            <h2 className="mb-4">
+
+                                Registered Students
+
+                            </h2>
+                                                        <table className="table table-bordered table-hover">
+
+                                <thead className="table-dark">
+
+                                    <tr>
+
+                                        <th>Name</th>
+
+                                        <th>Email</th>
+
+                                        <th>Mobile</th>
+
+                                        <th>Action</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    {
+
+                                        students.map((student) => (
+
+                                            <tr key={student._id}>
+
+                                                <td>{student.name}</td>
+
+                                                <td>{student.email}</td>
+
+                                                <td>{student.mobile}</td>
+
+                                                <td>
+
+                                                    <button
+
+                                                        className="btn btn-warning btn-sm me-2"
+
+                                                        data-bs-toggle="modal"
+
+                                                        data-bs-target="#editStudentModal"
+
+                                                        onClick={() => openEditModal(student)}
+
+                                                    >
+
+                                                        Edit
+
+                                                    </button>
+
+                                                    <button
+
+                                                        className="btn btn-danger btn-sm"
+
+                                                        onClick={() => deleteStudent(student._id)}
+
+                                                    >
+
+                                                        Delete
+
+                                                    </button>
+
+                                                </td>
+
+                                            </tr>
+
+                                        ))
+
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div className="col-md-10">
+            </div>
+                        {/* Edit Student Modal */}
 
-                    <Topbar />
+            <div
+                className="modal fade"
+                id="editStudentModal"
+                tabIndex="-1"
+                aria-hidden="true"
+            >
 
-                    <div className="container mt-4">
+                <div className="modal-dialog modal-dialog-centered">
 
-                        <h2 className="mb-4">
+                    <div className="modal-content">
 
-                            Registered Students
+                        <div className="modal-header">
 
-                        </h2>
+                            <h5 className="modal-title">
 
-                        <table className="table table-bordered table-hover">
+                                Edit Student
 
-                            <thead className="table-dark">
+                            </h5>
 
-                                <tr>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                            ></button>
 
-                                    <th>Name</th>
+                        </div>
 
-                                    <th>Email</th>
+                        <div className="modal-body">
 
-                                    <th>Mobile</th>
+                            <div className="mb-3">
 
-                                    <th>Action</th>
+                                <label className="form-label">
 
-                                </tr>
+                                    Name
 
-                            </thead>
+                                </label>
 
-                            <tbody>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={editData.name}
+                                    onChange={(e) =>
+                                        setEditData({
+                                            ...editData,
+                                            name: e.target.value
+                                        })
+                                    }
+                                />
 
-                                {
+                            </div>
 
-                                    students.map((student) => (
+                            <div className="mb-3">
 
-                                        <tr key={student._id}>
+                                <label className="form-label">
 
-                                            <td>{student.name}</td>
+                                    Mobile
 
-                                            <td>{student.email}</td>
+                                </label>
 
-                                            <td>{student.mobile}</td>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={editData.mobile}
+                                    onChange={(e) =>
+                                        setEditData({
+                                            ...editData,
+                                            mobile: e.target.value
+                                        })
+                                    }
+                                />
 
-                                            <td>
+                            </div>
 
-                                                <button
+                            <div className="mb-3">
 
-                                                    className="btn btn-danger btn-sm"
+                                <label className="form-label">
 
-                                                    onClick={() => deleteStudent(student._id)}
+                                    Course
 
-                                                >
+                                </label>
 
-                                                    Delete
+                                <select
+                                    className="form-select"
+                                    value={editData.course}
+                                    onChange={(e) =>
+                                        setEditData({
+                                            ...editData,
+                                            course: e.target.value
+                                        })
+                                    }
+                                >
 
-                                                </button>
+                                    <option value="">Select Course</option>
+                                    <option>Hip-Hop</option>
+                                    <option>Freestyle</option>
+                                    <option>Bharatanatyam</option>
+                                    <option>Classical</option>
 
-                                            </td>
+                                </select>
 
-                                        </tr>
+                            </div>
 
-                                    ))
+                            <div className="mb-3">
 
-                                }
+                                <label className="form-label">
 
-                            </tbody>
+                                    Batch
 
-                        </table>
+                                </label>
+
+                                <select
+                                    className="form-select"
+                                    value={editData.batch}
+                                    onChange={(e) =>
+                                        setEditData({
+                                            ...editData,
+                                            batch: e.target.value
+                                        })
+                                    }
+                                >
+
+                                    <option value="">Select Batch</option>
+                                    <option>Morning</option>
+                                    <option>Evening</option>
+                                    <option>Weekend</option>
+
+                                </select>
+
+                            </div>
+
+                            <div className="mb-3">
+
+                                <label className="form-label">
+
+                                    Instructor
+
+                                </label>
+
+                                <select
+                                    className="form-select"
+                                    value={editData.instructor}
+                                    onChange={(e) =>
+                                        setEditData({
+                                            ...editData,
+                                            instructor: e.target.value
+                                        })
+                                    }
+                                >
+
+                                    <option value="">Select Instructor</option>
+                                    <option>Alex Johnson</option>
+                                    <option>Priya Sharma</option>
+                                    <option>David Kumar</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div className="modal-footer">
+
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+
+                                Cancel
+
+                            </button>
+
+                            <button
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={saveStudentChanges}
+                                data-bs-dismiss="modal"
+                            >
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -137,7 +424,7 @@ function ManageStudents() {
 
             </div>
 
-        </div>
+        </>
 
     );
 
