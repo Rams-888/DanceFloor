@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { API_URL } from "../config";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -27,10 +27,8 @@ function Student() {
             try {
 
                 const res = await axios.get(
-
-                    `http://localhost:5000/api/users/${loggedInUser._id}`
-
-                );
+    `${API_URL}/api/users/${loggedInUser._id}`
+);
 
                 setUser(res.data);
 
@@ -57,18 +55,12 @@ function Student() {
         try {
 
             const res = await axios.put(
-
-                `http://localhost:5000/api/users/${user._id}`,
-
-                {
-
-                    name: editData.name,
-
-                    mobile: editData.mobile
-
-                }
-
-            );
+    `${API_URL}/api/users/${loggedInUser._id}`,
+    {
+        name: editData.name,
+        mobile: editData.mobile
+    }
+);
 
             setUser(res.data.user);
 
