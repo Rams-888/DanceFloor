@@ -26,11 +26,15 @@ function Student() {
 
             try {
 
-                const res = await axios.get(
+                console.log("Logged In User:", loggedInUser);
+
+const res = await axios.get(
     `${API_URL}/api/users/${loggedInUser._id}`
 );
 
-                setUser(res.data);
+console.log("API Response:", res.data);
+
+setUser(res.data);
 
             }
 
@@ -87,20 +91,7 @@ function Student() {
         }
 
     };
-
-    if (!user) {
-
-        return (
-
-            <div className="text-center mt-5">
-
-                <h3>Loading...</h3>
-
-            </div>
-
-        );
-
-    }
+    if (!user) return null;
 
     return (
 
@@ -176,7 +167,7 @@ function Student() {
 
                             <h4 className="fw-bold mt-3">
 
-                                {user.name}
+                                {user?.name}
 
                             </h4>
 
@@ -203,16 +194,11 @@ function Student() {
                                     data-bs-target="#editProfileModal"
 
                                     onClick={() =>
-
-                                        setEditData({
-
-                                            name: user.name,
-
-                                            mobile: user.mobile
-
-                                        })
-
-                                    }
+    setEditData({
+        name: user?.name || "",
+        mobile: user?.mobile || ""
+    })
+}
 
                                 >
 
@@ -230,7 +216,7 @@ function Student() {
 
                                     <p className="mb-0">
 
-                                        {user.email}
+                                        {user?.email}
 
                                     </p>
 
@@ -242,7 +228,7 @@ function Student() {
 
                                     <p className="mb-0">
 
-                                        {user.mobile}
+                                        {user?.mobile}
 
                                     </p>
 
@@ -254,7 +240,7 @@ function Student() {
 
                                     <p className="mb-0">
 
-                                        {user.course || "Not Assigned"}
+                                        {user?.course || "Not Assigned"}
 
                                     </p>
 
@@ -266,7 +252,7 @@ function Student() {
 
                                     <p className="mb-0">
 
-                                        {user.batch || "Not Assigned"}
+                                        {user?.batch || "Not Assigned"}
 
                                     </p>
 
@@ -278,7 +264,7 @@ function Student() {
 
                                     <p className="mb-0">
 
-                                        {user.instructor || "Not Assigned"}
+                                        {user?.instructor || "Not Assigned"}
 
                                     </p>
 
@@ -719,7 +705,7 @@ function Student() {
                     <input
                         type="email"
                         className="form-control"
-                        value={user.email}
+                        value={user?.email}
                         disabled
                     />
 
@@ -742,7 +728,7 @@ function Student() {
                     <input
                         type="text"
                         className="form-control"
-                        value={user.course || "Not Assigned"}
+                        value={user?.course || "Not Assigned"}
                         disabled
                     />
 
@@ -759,7 +745,7 @@ function Student() {
                     <input
                         type="text"
                         className="form-control"
-                        value={user.batch || "Not Assigned"}
+                        value={user?.batch || "Not Assigned"}
                         disabled
                     />
 
@@ -776,7 +762,7 @@ function Student() {
                     <input
                         type="text"
                         className="form-control"
-                        value={user.instructor || "Not Assigned"}
+                        value={user?.instructor || "Not Assigned"}
                         disabled
                     />
 
